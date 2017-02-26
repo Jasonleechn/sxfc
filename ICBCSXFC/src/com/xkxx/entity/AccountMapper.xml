@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"      
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xkxx.dao.AccountDao">
+	
+	<select id="findByUniqueKey" 
+		parameterType="string" 
+		resultType="com.xkxx.entity.Account">
+		<![CDATA[
+			select 
+				devid,accountno,personid,zoneno,date8,openid,note1,note2,note3,pwd,username,type,devidaddr,custid,telphone   
+			from sxfc_devid a 
+			where a.devid=#{devid,jdbcType=VARCHAR} and a.type=#{type,jdbcType=VARCHAR}
+		]]>
+	</select>
+	
+	<insert id="insertOne" 
+		parameterType="com.xkxx.entity.Account">
+	<![CDATA[
+		insert into sxfc_devid values(
+			#{devid,jdbcType=VARCHAR},
+			#{accountno,jdbcType=VARCHAR},
+			#{personid,jdbcType=VARCHAR},
+			#{zoneno,jdbcType=VARCHAR},
+			#{date8,jdbcType=VARCHAR},
+			#{openid,jdbcType=VARCHAR},
+			#{note1,jdbcType=VARCHAR},
+			#{note2,jdbcType=VARCHAR},
+			#{note3,jdbcType=VARCHAR},
+			#{pwd,jdbcType=VARCHAR},
+			#{username,jdbcType=VARCHAR},
+			#{type,jdbcType=VARCHAR},
+			#{devidaddr,jdbcType=VARCHAR},
+			#{custid,jdbcType=VARCHAR},
+			#{telphone,jdbcType=VARCHAR}
+		)
+	]]>
+	</insert>
+	
+	<update id="updatePwd" 
+		parameterType="com.xkxx.entity.Account">
+		<![CDATA[
+			update sxfc_devid set pwd=#{pwd,jdbcType=VARCHAR} 
+			where devid=#{devid,jdbcType=VARCHAR} and type=#{type,jdbcType=VARCHAR}
+		]]>
+	</update>
+	<update id="updatePerInfo" 
+		parameterType="com.xkxx.entity.Account">
+		<![CDATA[
+			update sxfc_devid set personid=#{personid,jdbcType=VARCHAR} 
+			where devid=#{devid,jdbcType=VARCHAR}
+		]]>
+	</update>
+	
+	<!-- 更新一条记录 -->
+	<update id="updateOne" 
+		parameterType="com.xkxx.entity.Account">
+		<![CDATA[
+			update sxfc_devid set personid=#{personid,jdbcType=VARCHAR}, 
+								  accountno=#{accountno,jdbcType=VARCHAR},
+								  date8=#{date8,jdbcType=VARCHAR},
+								  username=#{username,jdbcType=VARCHAR},
+								  devidaddr=#{devidaddr,jdbcType=VARCHAR},
+								  custid=#{custid,jdbcType=VARCHAR},
+								  telphone=#{telphone,jdbcType=VARCHAR}
+		]]>
+		<where>
+			<if test="devid!=null &amp;&amp; devid.length()>0">
+				and devid=#{devid}
+			</if>
+			<if test="type!=null &amp;&amp; type.length()>0">
+				and type=#{type}
+			</if>
+		</where>
+	</update>
+	
+	<delete id="deleteByUniqueKey" 
+		parameterType="com.xkxx.entity.Account">
+		<![CDATA[
+			delete from sxfc_devid a  
+			where a.devid=#{devid,jdbcType=VARCHAR} and a.type=#{type,jdbcType=VARCHAR}
+		]]>
+	</delete>
+	
+</mapper>

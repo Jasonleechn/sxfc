@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"      
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+-->
+<mapper namespace="com.xkxx.dao.BindInfoDao">
+	<insert id="insertOne" 
+		parameterType="com.xkxx.entity.BindInfo">
+	<![CDATA[
+		insert into sxfc_bindInfo values(
+			#{devid,jdbcType=VARCHAR},
+			#{personid,jdbcType=VARCHAR},
+			#{cardno,jdbcType=VARCHAR},
+			#{date8,jdbcType=VARCHAR},
+			#{status,jdbcType=VARCHAR},
+			#{errmsg,jdbcType=VARCHAR},
+			#{note1,jdbcType=VARCHAR},
+			#{username,jdbcType=VARCHAR},
+			#{zoneno,jdbcType=VARCHAR}
+		)
+	]]>
+	</insert>
+	
+	<select id="findAllRecordByDevid" 
+		parameterType="string" 
+		resultType="com.xkxx.entity.BindInfo">
+		<![CDATA[
+			select 
+				devid,personid,cardno,date8,status,errmsg,note1,username,zoneno  
+			from sxfc_bindInfo a 
+			where a.devid=#{devid,jdbcType=VARCHAR}
+		]]>
+	</select>
+	
+	<select id="findByUniqueKey" 
+		resultType="com.xkxx.entity.BindInfo">
+		<![CDATA[
+			select 
+				devid,personid,cardno,date8,status,errmsg,note1,username,zoneno 
+			from sxfc_bindInfo a 
+			where a.devid=#{devid,jdbcType=VARCHAR} and a.cardno=#{cardno,jdbcType=VARCHAR}
+		]]>
+	</select>
+	
+	<delete id="deleteByUniqueKey" >
+		<![CDATA[
+			delete from sxfc_bindInfo a  
+			where a.devid=#{devid,jdbcType=VARCHAR} and a.cardno=#{cardno,jdbcType=VARCHAR}
+		]]>
+	</delete>
+	
+	<update id="updateByUniqueKey" >
+		<![CDATA[
+			update sxfc_bindInfo a set status='1' 
+			where a.devid=#{devid,jdbcType=VARCHAR} and a.cardno=#{cardno,jdbcType=VARCHAR}
+		]]>
+	</update>
+	
+	</mapper>
