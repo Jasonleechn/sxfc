@@ -48,7 +48,7 @@ public class TestLog4j {
 		}*/
 		
 		
-	//	System.out.println(VDate.getCurDate("yyyyMMdd"));
+		System.out.println("aaaaaaaaaaaaa");
 		
 		
 	}
